@@ -1,0 +1,18 @@
+version: "3"
+services:
+  database:
+    image: mongo:3.2.4
+  
+    ports:
+    - 27018:27018
+    command: --smallfiles
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      
+    ports:
+    - 8080:8080
+    links:
+    - database
