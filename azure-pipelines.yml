@@ -32,11 +32,13 @@ steps:
   inputs:
     containerRegistry: 'Docker-raghav141988'
     repository: 'raghav141988/java-server'
-    command: 'push'
+    command: 'buildAndPush'
+    Dockerfile: '**/DemoRestAPI/Dockerfile'
+    buildContext: '**/DemoRestAPI'
 - task: Docker@2
   inputs:
     containerRegistry: 'Docker-raghav141988'
     repository: 'raghav141988/k8s-client'
     command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    Dockerfile: '**/multik8s-Client/Dockerfile'
     buildContext: '**/multik8s-Client'
