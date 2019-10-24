@@ -9,9 +9,13 @@ spec:
   rules:
     - http:
         paths:
-          
-          - path: /?(.*)
+          - path: /api/?(.*)
           # UPDATE THIS LINE ABOVE
             backend:
               serviceName: server-cluster-ip-service
               servicePort: 8080
+          - path: /?(.*)
+          # UPDATE THIS LINE ABOVE
+            backend:
+              serviceName: client-cluster-ip-service
+              servicePort: 4200
