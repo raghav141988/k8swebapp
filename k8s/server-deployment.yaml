@@ -20,9 +20,9 @@ spec:
           env:
             - name: MONGODB_HOST
               value: mango-cluster-ip-service
-            - name: CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: clientsecret
-                  key: CLIENT_SECRET
+            #- name: CLIENT_SECRET
+              #valueFrom:
+                #secretKeyRef:
+                  #name: clientsecret
+                  #key: CLIENT_SECRET
         
