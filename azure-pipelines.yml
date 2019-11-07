@@ -39,6 +39,8 @@ steps:
     command: 'buildAndPush'
     Dockerfile: './DemoRestAPI/Dockerfile'
     buildContext: './DemoRestAPI'
+    tags: |
+      latest
 - task: Docker@2
   inputs:
     containerRegistry: 'Docker-raghav141988'
@@ -46,3 +48,5 @@ steps:
     command: 'buildAndPush'
     Dockerfile: './multik8s-Client/Dockerfile'
     buildContext: './multik8s-Client'
+    tags: |
+      latest
