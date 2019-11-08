@@ -41,6 +41,7 @@ steps:
     buildContext: './DemoRestAPI'
     tags: |
       latest
+      $(Build.BuildId)
 - task: Docker@2
   inputs:
     containerRegistry: 'Docker-raghav141988'
@@ -50,3 +51,35 @@ steps:
     buildContext: './multik8s-Client'
     tags: |
       latest
+      $(Build.BuildId)
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'kubedemo'
+    namespace: 'kube-system'
+    command: 'apply'
+    arguments: '-f k8s'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Container Registry'
+    dockerRegistryEndpoint: 'Docker-raghav141988'
+    secretName: 'docker-secret'
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'kubedemo'
+    namespace: 'kube-system'
+    command: 'set'
+    arguments: 'image deployment/server-deployment server=raghav141988/java-server:$(Build.BuildId)'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Container Registry'
+    dockerRegistryEndpoint: 'Docker-raghav141988'
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'kubedemo'
+    namespace: 'kube-system'
+    command: 'set'
+    arguments: 'image deployment/client-deployment client=raghav141988/k8s-client:$(Build.BuildId)'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Container Registry'
+    dockerRegistryEndpoint: 'Docker-raghav141988'
