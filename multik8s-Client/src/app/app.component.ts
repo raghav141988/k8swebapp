@@ -7,7 +7,7 @@ import { OktaAuthService } from '@okta/okta-angular';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'client';
+  title = 'client V2';
   isAuthenticated: boolean;
 
   constructor(public oktaAuth: OktaAuthService) {
